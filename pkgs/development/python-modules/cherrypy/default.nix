@@ -23,7 +23,7 @@
 
 buildPythonPackage rec {
   pname = "cherrypy";
-  version = "18.6.1";
+  version = "18.7.0";
   format = "setuptools";
 
   disabled = pythonOlder "3.7";
@@ -31,7 +31,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "CherryPy";
     inherit version;
-    hash = "sha256-8z6HKG57PjCeBOciXY5JOC2dd3PmCSJB1/YTiTxWNJU=";
+    hash = "sha256-cpRS95jKdWOQBG7zGAQ8roZKRoFN6vPmvTTclZrxmN4=";
   };
 
   nativeBuildInputs = [
