@@ -17,14 +17,14 @@
 
 buildPythonPackage rec {
   pname = "ttp";
-  version = "0.8.4";
+  version = "0.9.1";
   format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "dmulyalin";
     repo = pname;
-    rev = version;
-    hash = "sha256-vuKlddqm8KirqAJyvBPfRb5Nw9zo4Fl1bwbfVMhmH9g=";
+    rev = "refs/tags/${version}";
+    hash = "sha256-FhuIYXktcNnOVX+KU5cDOd2Qk7AcWaSKvfB/BZYpsZo=";
   };
 
   propagatedBuildInputs = [
