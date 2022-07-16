@@ -7,7 +7,7 @@
 
 buildPythonPackage rec {
   pname = "jaraco-context";
-  version = "4.1.1";
+  version = "4.1.2";
   format = "setuptools";
 
   disabled = pythonOlder "3.6";
@@ -15,8 +15,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "jaraco";
     repo = "jaraco.context";
-    rev = "v${version}";
-    sha256 = "O9Lwv2d/qbiXxIVCp6FLmVKaz0MzAUkoUd0jAyIvgJc=";
+    rev = "refs/tags/v${version}";
+    sha256 = "sha256-gfrDZW4d3X/QjUBN8DFSvKRLZge3pnZ6KkI7S7Nz3W0=";
   };
 
   SETUPTOOLS_SCM_PRETEND_VERSION = version;
