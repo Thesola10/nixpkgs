@@ -2,11 +2,11 @@
 
 buildPythonPackage rec {
   pname   = "python-gnupg";
-  version = "0.4.8";
+  version = "0.4.9";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "b64de1ae5cedf872b437201a566fa2c62ce0c95ea2e30177eb53aee1258507d7";
+    sha256 = "sha256-qqdIeVVyWRqvEntKyJhWhPNnP/grOfNwyDawBuaPxTc=";
   };
 
   # Let's make the library default to our gpg binary
