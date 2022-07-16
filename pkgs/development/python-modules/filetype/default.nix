@@ -7,14 +7,14 @@
 
 buildPythonPackage rec {
   pname = "filetype";
-  version = "1.0.13";
+  version = "1.1.0";
   format = "setuptools";
 
   disabled = pythonOlder "3.7";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-ahBHYv6T11XJYqqWyz2TCkj5GgdhBHEmxe6tIVPjOwM=";
+    hash = "sha256-r+SgAClgH2bSObcmiAZcx8IZ3sHJJ5lPkLgl6eU9j5M=";
   };
 
   checkInputs = [
