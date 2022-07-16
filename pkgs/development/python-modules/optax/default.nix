@@ -14,13 +14,13 @@
 
 buildPythonPackage rec {
   pname = "optax";
-  version = "0.1.1";
+  version = "0.1.3";
 
   src = fetchFromGitHub {
     owner = "deepmind";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-s/BcqzhdfWzR61MStusUPQtuT4+t8NcC5gBGiGggFqw=";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-XAYztMBQpLBHNuNED/iodbwIMJSN/0GxdmTGQ5jD9Ws=";
   };
 
   buildInputs = [ jaxlib ];
