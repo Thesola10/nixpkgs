@@ -6,7 +6,7 @@
 
 buildPythonPackage rec {
   pname = "ttp-templates";
-  version = "0.1.4";
+  version = "0.3.1";
   format = "setuptools";
 
   disabled = pythonOlder "3.7";
@@ -15,7 +15,7 @@ buildPythonPackage rec {
     owner = "dmulyalin";
     repo = "ttp_templates";
     rev = "refs/tags/${version}";
-    hash = "sha256-yVDJAJXZU4pwvXSKRKUfSHqU23NcdgedOMmynMAD/Po=";
+    hash = "sha256-35Ej76E9qy5EY41Jt2GDCldyXq7IkdqKxVFrBOJh9nE=";
   };
 
   postPatch = ''
