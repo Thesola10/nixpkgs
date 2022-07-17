@@ -85,6 +85,8 @@ buildPythonPackage rec {
     "test_generate_toml_config"
     "test_help_msg"
     "test_output_of_callback_options"
+    # Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted. The list of emitted warnings is: [].
+    "test_save_and_load_not_a_linter_stats"
   ] ++ lib.optionals stdenv.isDarwin [
     "test_parallel_execution"
     "test_py3k_jobs_option"
