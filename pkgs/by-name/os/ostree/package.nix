@@ -4,14 +4,9 @@
 , pkg-config
 , gtk-doc
 , gobject-introspection
-, gjs
-, nixosTests
-, pkgsCross
 , curl
 , glib
-, systemd
 , xz
-, e2fsprogs
 , libsoup
 , glib-networking
 , wrapGAppsNoGuiHook
@@ -21,21 +16,21 @@
 , autoconf
 , automake
 , libtool
-, fuse3
-, util-linuxMinimal
-, libselinux
+, macfuse-stubs
 , libsodium
 , libarchive
-, libcap
 , bzip2
 , bison
 , libxslt
 , docbook-xsl-nons
 , docbook_xml_dtd_42
 , python3
+, e2fsprogs
+, darwin
 }:
 
 let
+  inherit (darwin) Libsystem;
   testPython = python3.withPackages (p: with p; [
     pyyaml
   ]);
@@ -70,38 +65,28 @@ in stdenv.mkDerivation rec {
   buildInputs = [
     curl
     glib
-    systemd
-    e2fsprogs
     libsoup
     glib-networking
     gpgme
-    fuse3
-    libselinux
+    macfuse-stubs
     libsodium
-    libcap
     libarchive
     bzip2
     xz
-    util-linuxMinimal # for libmount
-
-    # for installed tests
-    testPython
-    gjs
+    Libsystem
+    e2fsprogs
   ];
 
   enableParallelBuilding = true;
 
   configureFlags = [
     "--with-curl"
-    "--with-systemdsystemunitdir=${placeholder "out"}/lib/systemd/system"
-    "--with-systemdsystemgeneratordir=${placeholder "out"}/lib/systemd/system-generators"
-    "--enable-installed-tests"
+    "--without-selinux"
+    "--without-libsystemd"
     "--with-ed25519-libsodium"
   ];
 
   makeFlags = [
-    "installed_testdir=${placeholder "installedTests"}/libexec/installed-tests/libostree"
-    "installed_test_metadir=${placeholder "installedTests"}/share/installed-tests/libostree"
     # Setting this flag was required as workaround for a clang bug, but seems not relevant anymore.
     # https://github.com/ostreedev/ostree/commit/fd8795f3874d623db7a82bec56904648fe2c1eb7
     # See also Makefile-libostree.am
@@ -111,24 +96,6 @@ in stdenv.mkDerivation rec {
   preConfigure = ''
     env NOCONFIGURE=1 ./autogen.sh
   '';
-
-  postFixup = let
-    typelibPath = lib.makeSearchPath "/lib/girepository-1.0" [
-      (placeholder "out")
-      gobject-introspection
-    ];
-  in ''
-    for test in $installedTests/libexec/installed-tests/libostree/*.js; do
-      wrapProgram "$test" --prefix GI_TYPELIB_PATH : "${typelibPath}"
-    done
-  '';
-
-  passthru = {
-    tests = {
-      musl = pkgsCross.musl64.ostree;
-      installedTests = nixosTests.installed-tests.ostree;
-    };
-  };
 
   meta = with lib; {
     description = "Git for operating system binaries";
